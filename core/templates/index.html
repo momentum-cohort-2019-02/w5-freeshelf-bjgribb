@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
 {% block content %}
 <section class="mw8 center">
   <h1 class="athelas ph3 ph0-l mb1 mt1">Books</h2>
@@ -13,9 +13,10 @@
         </p>
       </div>
       <div class="pl3-ns order-1 order-2-ns mb2 mb0-ns w-100 w-40-ns">
-        <img class="mt2 mb0" src={{ book.picture.url }} class="db">
+        <img class="mt2 mb0" src="{{ book.picture }}" class="db">
+        {% comment %} <p>{{book.get_absolute_url}}</p> {% endcomment %}
       </div>
-    </div>
+    </div>  
     <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ book.author }}</span></p>
     <time class="f6 db gray mb1">{{ book.date_added }}</time>
   </article>

@@ -6,7 +6,6 @@ from django.views import generic
 def index(request):
     """View function for home page of site."""
 
-    # counts number of posted books
     books = Book.objects.all()
     context = {
         'books': books,
