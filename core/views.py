@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from core.models import Book, Author, Category
+from django.shortcuts import render, get_object_or_404
+from core.models import Book, Topic
 from django.views import generic
 # Create your views here.
 
@@ -7,21 +7,12 @@ def index(request):
     """View function for home page of site."""
 
     # counts number of posted books
-    num_books = Book.objects.all().count()
-
-    # counts number of authors
-    num_authors = Author.objects.count()
-
+    books = Book.objects.all()
     context = {
-        'num_books': num_books,
-        'num_authors': num_authors,
+        'books': books,
     }
 
     return render(request, 'index.html', context=context)
 
 class BookListView(generic.ListView):
     model = Book
-    context_object_name = 'top_books'
-
-
-# class Book_view()

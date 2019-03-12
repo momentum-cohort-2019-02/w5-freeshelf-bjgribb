@@ -10,17 +10,16 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    {% block header %}
-    <nav class="pa3 pa4-ns">
-    <a class="black b f1 f-headline-ns tc db mb3 mb4-ns">Free Programming Books!</a>
-    <div class="tc pb3">
-        <a class="gray f6 f5-ns dib mr3">Books by Categories:</a>
-        <a class="link dim gray f6 f5-ns dib mr3" href="#">Python</a>
-        <a class="link dim gray f6 f5-ns dib mr3" href="#">JavaScript</a>
-        <a class="link dim gray f6 f5-ns dib" href="#">Django</a>
-    </div>
-    </nav>
-    {% endblock %}
-    </div>
+<header class="athelas">
+<nav class="pa3 pa4-ns">
+  <p class="black b f1 f-headline-ns tc db mb3 mb4-ns">FreeShelf</p>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="#" title="Home">Home</a>
+    <a class="link dim gray f6 f5-ns dib mr3" href="#" title="About">Login</a>
+    <a class="link dim gray f6 f5-ns dib mr3" href="#" title="Store">Account</a>
+  </div>
+</nav>
+</header>
+    <div>{% block content %}{% endblock %}</div>
 </body>
 </html>
