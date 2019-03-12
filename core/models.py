@@ -10,6 +10,8 @@ class Book(models.Model):
     book_url = models.URLField(max_length=200, null=True)
     date_added = models.DateField('Date Added',auto_now_add=True)
 
+    class Meta:
+        ordering = ['-date_added']
 
     def __str__(self):
         """String representation."""
@@ -20,3 +22,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    pass
