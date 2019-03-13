@@ -8,4 +8,5 @@ admin.site.register(Topic)
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    pass
+    list_diplay = ('title', 'author')
+    

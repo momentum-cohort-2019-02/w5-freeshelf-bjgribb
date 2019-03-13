@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from core.models import Book
-from django.views import generic
 from core.models import Book, Topic
+from django.views import generic
 from core.forms import TopicSearch
 # Create your views here.
 
@@ -25,9 +24,6 @@ class BookListView(generic.ListView):
     model = Book
 
 
-class BookDetailView(generic.DetailView):
-    model = Book
-
-
-class TopicListView(generic.ListView):
-    model = Topic
+def book_detail_view(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    return render(request, 'core/book_detail.html', {'book': book})
