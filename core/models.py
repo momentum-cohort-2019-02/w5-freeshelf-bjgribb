@@ -24,7 +24,7 @@ class Book(models.Model):
         ordering = ['-date_added']
     
     def get_absolute_url(self):
-        return reverse('book_detail', kwargs={"pk": self.pk})
+        return reverse('book-detail', args=[str(self.id)])
     
     def __str__(self):
         """String representation."""
