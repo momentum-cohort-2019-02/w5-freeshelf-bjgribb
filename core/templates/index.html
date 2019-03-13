@@ -3,6 +3,13 @@
 {% block content %}
 <section class="mw8 center">
   <h2 class="athelas ph3 ph0-l mb1 mt1">Books</h2>
+   <form method="GET" action="{url 'index' %}">
+    <div>
+    <h4>Search by Topic:</h4>
+    {% for checkbox in topic_form.topic_choices %}
+    <div>Choices: {{ checkbox }} </div>
+    {% endfor %}
+  </div>
   {% for book in books %}
   <article class="pv3 bt bb b--black-10 ph3 ph0-l">
     <div class="flex">

@@ -6,18 +6,24 @@ from django.urls import reverse
 class Topic(models.Model):
     name = models.CharField(max_length=200)
 
+    def get_absolute_url(self):
+        return reverse("book-list", args=[str(self.id)])
+    
+
     def __str__(self):
         return self.name
+
 
 class Book(models.Model):
     """Model representing a book"""
     title = models.CharField(max_length=200, null=True, blank=True)
     author = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1500, null=True, blank=True)
-    # picture = models.ImageField(upload_to='pictures/', null=True)
     book_url = models.URLField(max_length=200, null=True, blank=True)
     date_added = models.DateField('Date Added',auto_now_add=True)
-    topics = models.ManyToManyField(Topic, verbose_name="topics")
+    book_topic = models.ManyToManyField(Topic, related_name='book_topics')
+    # book_slug = AutoSlugField(unique=True, populate_from='title')
+    # topic_choices = (topics.all(), "Topic")
     # slug = models.SlugField(null=True)
 
     class Meta:
@@ -30,8 +36,8 @@ class Book(models.Model):
         """String representation."""
         return self.title
 
-    def display_topics(self):
+    def display_book_topic(self):
         """Create a string for the topics of each book"""
-        return ', '.join(topics.name for topics in self.topics.all())
+        return ', '.join(book_topic.name for book_topic in self.book_topic.all())
 
-    display_topics.short_description = "Topic"
+    display_book_topic.short_description = "Topic"
