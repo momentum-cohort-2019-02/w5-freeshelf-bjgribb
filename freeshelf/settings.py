@@ -130,4 +130,4 @@ INTERNAL_IPS = [
     '127.0.0.1'
 ]
 
-django.heroku.settings(locals())
+django_heroku.settings(locals())
