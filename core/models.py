@@ -9,7 +9,7 @@ class Topic(models.Model):
     slug = models.SlugField()
 
     def get_absolute_url(self):
-        return reverse("topic_list", args=[str(self.id)])
+        return reverse("topic_list", kwargs={"slug": self.slug})
 
     def get_slug(self):
         self.slug = slugify(self.name)
