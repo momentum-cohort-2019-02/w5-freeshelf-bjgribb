@@ -8,7 +8,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=200)
 
     def get_absolute_url(self):
-        return reverse("book-list", args=[str(self.id)])
+        return reverse("topic_list", args=[str(self.id)])
     
     def __str__(self):
         return self.name
@@ -23,9 +23,6 @@ class Book(models.Model):
     date_added = models.DateField('Date Added',auto_now_add=True, null=True, blank=True)
     book_topic = models.ManyToManyField(Topic, related_name='book_topics')
     slug = models.SlugField(unique=True)
-    # book_slug = AutoSlugField(unique=True, populate_from='title')
-    # topic_choices = (topics.all(), "Topic")
-    # slug = models.SlugField(null=True)
 
     class Meta:
         ordering = ['-date_added']

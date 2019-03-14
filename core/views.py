@@ -1,29 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 from core.models import Book, Topic
 from django.views import generic
-from core.forms import TopicSearch
 # Create your views here.
 
 def index(request):
     """View function for home page of site."""
-    if request.GET:
-        form = TopicSearch(request.GET)
-        books = form.search()
-    else:
-        form = TopicSearch()
-        books = Book.objects.all()
+    books = Book.objects.all()
+    topics = Topic.objects.all()
+    context = {
+        'books': books,
+        'topics': topics
+    }
+    return render(request, 'index.html', context=context)
 
-    response = render(request, 'index.html', {
-        "books": books,
-        "topic_form": form,
-        })
 
-    return response
-
-class BookListView(generic.ListView):
-    model = Book
+# class TopicListView(generic.ListView):
+#     model = Topic
 
 
 def book_detail_view(request, slug):
     book = get_object_or_404(Book, slug=slug)
     return render(request, 'core/book_detail.html', {'book': book})
+
+def topic_list_view(request, pk):
+    topic = get_object_or_404(Topic, pk=pk)
+    return render(request, 'core/topic_list.html', {'topic': topic})
