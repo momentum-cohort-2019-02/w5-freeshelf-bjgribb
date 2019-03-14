@@ -6,9 +6,13 @@ from django.utils.text import slugify
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField()
 
     def get_absolute_url(self):
         return reverse("topic_list", args=[str(self.id)])
+
+    def get_slug(self):
+        self.slug = slugify(self.name)
     
     def __str__(self):
         return self.name
