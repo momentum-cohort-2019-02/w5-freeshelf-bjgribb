@@ -24,4 +24,5 @@ def book_detail_view(request, slug):
 
 def topic_list_view(request, slug):
     topic = get_object_or_404(Topic, slug=slug)
-    return render(request, 'core/topic_list.html', {'topic': topic})
+    book = topic.book_set
+    return render(request, 'core/topic_list.html', {'topic': topic, 'book': book})

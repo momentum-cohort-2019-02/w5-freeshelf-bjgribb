@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<div class="athelas pa3 pa4-ns">
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+
+<tr>
+  <td>{{ form.username.label_tag }}</td>
+  <td>{{ form.username }}</td>
+</tr>
+
+<tr>
+  <td>{{ form.password.label_tag }}</td>
+  <td>{{ form.password }}</td>
+</tr>
+</table>
+<div class="mt2">
+<input class="grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib black" type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+</div>
+{# Assumes you setup the password_reset view in your URLconf #}
+{% comment %} <p><a class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib navy" href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
+
+{% endblock %}

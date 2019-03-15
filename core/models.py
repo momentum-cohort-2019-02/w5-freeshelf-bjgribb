@@ -6,10 +6,10 @@ from django.utils.text import slugify
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255)
 
     def get_absolute_url(self):
-        return reverse("topic_list", kwargs={"slug": self.slug})
+        return reverse('topic_list', kwargs={"slug": self.slug})
 
     def get_slug(self):
         self.slug = slugify(self.name)
@@ -25,8 +25,8 @@ class Book(models.Model):
     description = models.TextField(max_length=1500, null=True, blank=True)
     book_url = models.URLField(max_length=200, null=True, blank=True)
     date_added = models.DateField('Date Added',auto_now_add=True, null=True, blank=True)
-    book_topic = models.ManyToManyField(Topic, related_name='book_topics')
-    slug = models.SlugField(unique=True)
+    book_topic = models.ManyToManyField(Topic)
+    slug = models.SlugField(max_length=255)
 
     class Meta:
         ordering = ['-date_added']

@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
 <section class="mw8 center">
-<h2 class="athelas ph3 ph0-l mb1 mt1">{{ topic.name }}</h2>
-{% for book in books %}
+<h2 class="athelas ph3 ph0-l mb1 mt1 f3">{{ topic.name }}</h2>
+{% for topic in topic.book_set.all %}
   <article class="pv3 bt bb b--black-10 ph3 ph0-l">
     <div class="flex">
       <div class="w-100 pr3-ns order-2 order-1-ns">
-        <a class="f3 link dim black athelas mt0 mb1" href="{{ book.get_absolute_url }}">{{ topic.book_set }}</a>
+        <a class="f3 link dim black athelas mt0 mb1" href="{{ topic.get_absolute_url }}">{{ topic }}</a>
         <p class="f5 f4-l lh-copy athelas">
-          {{ book.description | truncatechars:100 }}
+          {{ topic.description | truncatechars:100 }}
         </p>
       </div>
       {% comment %} <div class="pl3-ns order-1 order-2-ns mb2 mb0-ns w-100 w-40-ns">
@@ -17,8 +17,8 @@
         <p>{{book.get_absolute_url}}</p>
       </div> {% endcomment %}
     </div>
-    <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ book.author }}</span></p>
-    <time class="f6 db gray mb1">{{ book.date_added }}</time>
+    <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ topic.author }}</span></p>
+    <time class="f6 db gray mb1">{{ topic.date_added }}</time>
   </article>
 {% endfor %}
 </section>
