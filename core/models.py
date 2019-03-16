@@ -6,14 +6,16 @@ from django.utils.text import slugify
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=255)
-
+    slug = models.SlugField()
+    
     def get_absolute_url(self):
         return reverse('topic_list', kwargs={"slug": self.slug})
 
-    def get_slug(self):
-        self.slug = slugify(self.name)
-    
+    # def save(self): not overriding default save or something
+    #     if not self.slug:
+    #         self.slug = slugify(self.name)
+    #     return super(Topic, self).save()
+
     def __str__(self):
         return self.name
 
@@ -25,8 +27,8 @@ class Book(models.Model):
     description = models.TextField(max_length=1500, null=True, blank=True)
     book_url = models.URLField(max_length=200, null=True, blank=True)
     date_added = models.DateField('Date Added',auto_now_add=True, null=True, blank=True)
-    book_topic = models.ManyToManyField(Topic)
-    slug = models.SlugField(max_length=255)
+    topics = models.ManyToManyField(Topic)
+    slug = models.SlugField()
 
     class Meta:
         ordering = ['-date_added']
@@ -44,8 +46,8 @@ class Book(models.Model):
         """String representation."""
         return self.title
 
-    def display_book_topic(self):
+    def display_topics(self):
         """Create a string for the topics of each book"""
-        return ', '.join(book_topic.name for book_topic in self.book_topic.all())
+        return ', '.join(topic.name for topic in self.topics.all())
 
-    display_book_topic.short_description = "Topic"
+    display_topics.short_description = "Topic"

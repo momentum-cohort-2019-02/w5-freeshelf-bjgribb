@@ -33,13 +33,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Third-party apps
+    'registration',
+    'debug_toolbar',
+
+    # Built-in Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+
+    # My apps
     'core',
 ]
 
@@ -130,7 +136,13 @@ INTERNAL_IPS = [
     '127.0.0.1'
 ]
 
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+# Heroku Deployment
 django_heroku.settings(locals())
+
+# Email
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -8,7 +8,7 @@ from core.models import Book, Topic
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'display_book_topic')
+    list_display = ('title', 'display_topics')
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):

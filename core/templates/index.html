@@ -1,4 +1,4 @@
-{% extends "base_generic.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% block content %}
 <section class="mw8 center">
@@ -7,7 +7,7 @@
     <div class="athelas flex flex-wrap">
     <h4 class="mb1 mt1 mr1">Search by Topic:</h4>
       {% for topic in topics %}
-      <a class="link dim black mr1 mt1 mb1 order-2-s" href="{{topic.get_absolute_url}}">{{ topic.name }}</a>
+      <a class="link dim black mr2 mt1 mb1 order-2-s" href="{{topic.get_absolute_url}}">{{ topic.name }}</a>
       {% endfor %}
   </div>
 </div>
