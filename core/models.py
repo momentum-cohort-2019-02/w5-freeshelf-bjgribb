@@ -1,8 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.contrib.auth import get_user_model
 
 # Create your models here.
+
+User = get_user_model()
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
@@ -30,6 +33,9 @@ class Book(models.Model):
     topics = models.ManyToManyField(Topic)
     slug = models.SlugField()
 
+    favorited_by = models.ManyToManyField(
+        to=User, related_name="favorite_books", through='Favorite')
+
     class Meta:
         ordering = ['-date_added']
     
@@ -51,3 +57,9 @@ class Book(models.Model):
         return ', '.join(topic.name for topic in self.topics.all())
 
     display_topics.short_description = "Topic"
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    favorited_at = models.DateTimeField(auto_now_add=True)
