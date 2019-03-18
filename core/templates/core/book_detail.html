@@ -2,21 +2,21 @@
 {% load static %}
 {% block content %}
 <section class="mw8 center">
-    <h2 class="athelas ph3 ph0-l mb1 mt1 f3">{{ book.title }}</h2>
-    <article class="pv3 bt bb b--black-10 ph3 ph0-l">
+    <h2 class="athelas f3 mb1 ph3 ph0-l">{{ book.title }}</h2>
+    <article class="ph3 bt bb b--black-10 ph0-l">
         <div class="flex flex-column flex-row-ns">
-            <div class="w-100 w-60-ns pr3-ns order-1">
-                {% comment %} <a class="f3 link dim black athelas mt0 mb1" href="{{ book.get_absolute_url }}">{{
-                    book.title }}</a> {% endcomment %}
-                <p class="f5 f4-l lh-copy athelas">
+            <div class="w-100 w-60-ns order-1">
+                <p class="f5 lh-copy athelas">
                     {{ book.description }}
                 </p>
             </div>
-            <div>
+            <div class="w-100 w-40-ns pl3-ns order-2 lh-copy">
+                <p class="f5 athelas ma0 pt3-ns pt0"><strong>Topic(s) covered:</strong> {{ book.display_topics }}</p>
+                <a class="f5 link dim black athelas" href="{{book.book_url}}" target="_blank"><strong>Url:</strong> {{ book.book_url }}</a>
                 {% if request.user.is_authenticated %}
                 <form action='{% url 'book_favorite' slug=book.slug %}' method="POST">
                     {% csrf_token %}
-                    <button type="submit">
+                    <button type="submit" class="hover-bg-black hover-white">
                         {% if book in request.user.favorite_books.all %}
                             Unfavorite
                         {% else %}
@@ -25,17 +25,13 @@
                         {{book.title}}</button>
                 </form>
                 {% endif %}
-                <p>
+                <p class="f5 athelas ma0">
                 {{ book.favorited_by.count }} Favorite(s)
                 </p>
             </div>
-            <div class="pl3-ns order-2 mb2 mb0-ns w-100 w-40-ns">
-                <p class="f5 f4-l athelas"><strong>Topic(s) covered:</strong> {{ book.display_topics }}</p>
-                <a class="f5 link dim black f4-l athelas" href="{{book.book_url}}" target="_blank"><strong>Url:</strong> {{ book.book_url }}</a>
-            </div>
         </div>
-        <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ book.author }}</span></p>
-        <time class="f6 db gray mb1"> {{ book.date_added }}</time>
+        <p class="f6 gray mv1">By <span class="ttu">{{ book.author }}</span></p>
+        <time class="f6 db gray"> {{ book.date_added }}</time>
     </article>
 </section>
 {% endblock %}
